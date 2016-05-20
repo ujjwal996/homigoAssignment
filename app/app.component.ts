@@ -19,6 +19,7 @@ import {PropertyComponent} from './property/property.component';
   </ul>
   <user-property [owner]="selectedOwner"></user-property>
 
+
   `,
   directives:[PropertyComponent],
   providers : [UserService]
@@ -30,10 +31,10 @@ export class AppComponent implements OnInit{
     this.selectedOwner = owner;
   }
   constructor(private _userservice:UserService){}
-  getOwners(){
-    this.owners = this._userservice.getOwner();
-  }
+  //getOwners(){
+    //this.owners = this._userservice.getOwner();
+  //}
   ngOnInit(){
-    this.getOwners();
+    this.owners = this._userservice.getOwner();
   }
 }

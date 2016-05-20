@@ -12,9 +12,17 @@ var core_1 = require('@angular/core');
 var tenant_mock_deatils_1 = require('./tenant-mock-deatils');
 var TenantService = (function () {
     function TenantService() {
+        this.counter = 0;
     }
-    TenantService.prototype.getPropertyTenants = function () {
-        return tenant_mock_deatils_1.PROPTENANTS;
+    //array of Tenants who stay in the property_id= property.id
+    TenantService.prototype.getPropertyTenants = function (propertyid) {
+        for (var i; i < tenant_mock_deatils_1.PROPTENANTS.length; i++) {
+            if (tenant_mock_deatils_1.PROPTENANTS[i].property_id == propertyid) {
+                this.tenantsonproperty[this.counter] = tenant_mock_deatils_1.PROPTENANTS[i];
+                this.counter++;
+            }
+        }
+        return this.tenantsonproperty;
     };
     TenantService = __decorate([
         core_1.Injectable(), 

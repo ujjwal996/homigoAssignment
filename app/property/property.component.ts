@@ -2,13 +2,14 @@ import {Input,Component, OnInit} from '@angular/core';
 import {OwnerDetails} from '../user/owner-details';
 import {PropertyDetails} from './property-details';
 import {PropertyService} from './properties.service';
+import {TenantComponent} from '../tenant/tenant.component';
 
 @Component({
   selector:'user-property',
   template:`
-   <div *ngIf = "owner">
+   <div *ngIf = "owner!=null">
     <ul>
-      <li *ngFor = "let property of properties">
+      <li *ngFor = "let property of properties" (click) = "selectedProperty(property)">
       name : {{property.name}}
       city : {{property.city}}
       landmark : {{property.landmark}}
@@ -21,7 +22,9 @@ import {PropertyService} from './properties.service';
       </li>
     </ul>
    </div>
+   <property-tenants [prop]="selectedProp"></property-tenants>
   `,
+  directives:[TenantComponent],
   providers : [PropertyService]
 
 })
@@ -29,12 +32,18 @@ import {PropertyService} from './properties.service';
 export class PropertyComponent implements OnInit{
   @Input() owner : OwnerDetails;
   properties:PropertyDetails[];
+  selectedProp: PropertyDetails;
 
   constructor(private _propertyservice : PropertyService){}
-  getProperties(){
+
+  selectedProperty(selectedProperty : PropertyDetails){
+    this.selectedProp = selectedProperty;
+  }
+
+  getSelectedOwnerProperties(){
     this.properties = this._propertyservice.getOwnersProperty(this.owner.id);
   }
   ngOnInit(){
-    this.getProperties();
+    this.getSelectedOwnerProperties();
   }
 }

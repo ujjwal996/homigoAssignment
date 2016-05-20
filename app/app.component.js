@@ -18,16 +18,16 @@ var AppComponent = (function () {
     AppComponent.prototype.ownerSelected = function (owner) {
         this.selectedOwner = owner;
     };
-    AppComponent.prototype.getOwners = function () {
-        this.owners = this._userservice.getOwner();
-    };
+    //getOwners(){
+    //this.owners = this._userservice.getOwner();
+    //}
     AppComponent.prototype.ngOnInit = function () {
-        this.getOwners();
+        this.owners = this._userservice.getOwner();
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n  <h1>Owner's List</h1>\n  <ul>\n    <li *ngFor = \"let owner of owners\" (click) = ownerSelected(owner)>\n    name : {{owner.name}},<br>\n    address:{{owner.address}},<br>\n    phoneNo.:{{owner.phone}},<br>\n    emailId:{{owner.email}},<br>\n    <img src=\"{{owner.pic_url}}\" alt='' width = \"250px\" height=\"250px\">\n    </li>\n  </ul>\n  <user-property [owner]=\"selectedOwner\"></user-property>\n\n  ",
+            template: "\n  <h1>Owner's List</h1>\n  <ul>\n    <li *ngFor = \"let owner of owners\" (click) = ownerSelected(owner)>\n    name : {{owner.name}},<br>\n    address:{{owner.address}},<br>\n    phoneNo.:{{owner.phone}},<br>\n    emailId:{{owner.email}},<br>\n    <img src=\"{{owner.pic_url}}\" alt='' width = \"250px\" height=\"250px\">\n    </li>\n  </ul>\n  <user-property [owner]=\"selectedOwner\"></user-property>\n\n\n  ",
             directives: [property_component_1.PropertyComponent],
             providers: [user_service_1.UserService]
         }), 
